@@ -24,10 +24,9 @@ export class AuthenticationService {
   }
 
   async login(email: string, password: string) {
-    console.log('calling login service');
     let user: User;
     try {
-      user = await this.usersService.findOne({ where: { email } });
+      user = await this.usersService.findOne({ where: { email: email } });
       console.log(user);
     } catch (err) {
       throw new UnauthorizedException('User not found');
