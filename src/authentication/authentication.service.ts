@@ -6,7 +6,7 @@ import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class AuthenticationService {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   async register(createUserDto: CreateUserDto) {
     let user: User;
@@ -14,7 +14,6 @@ export class AuthenticationService {
     try {
       user = await this.usersService.create(createUserDto);
     } catch (err) {
-      console.log(err);
       throw new UnauthorizedException('Error creating account');
     }
 
@@ -27,7 +26,6 @@ export class AuthenticationService {
     let user: User;
     try {
       user = await this.usersService.findOne({ where: { email: email } });
-      console.log(user);
     } catch (err) {
       throw new UnauthorizedException('User not found');
     }
@@ -38,7 +36,6 @@ export class AuthenticationService {
 
     delete user.password;
 
-    console.log(user);
     return user;
   }
 
